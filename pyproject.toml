@@ -1,0 +1,25 @@
+[project]
+name = "mcp-demo"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Nam",email = "nguyennampfiev1995@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "arxiv (>=2.2.0,<3.0.0)",
+    "anthropic (>=0.59.0,<0.60.0)",
+    "dotenv (>=0.9.9,<0.10.0)",
+    "langchain (>=0.3.27,<0.4.0)",
+    "langchain-community (>=0.3.27,<0.4.0)",
+    "huggingface-hub (>=0.34.1,<0.35.0)",
+    "langchain-huggingface (>=0.3.1,<0.4.0)",
+    "vllm (>=0.10.0,<0.11.0)",
+    "bitsandbytes (>=0.46.1,<0.47.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
