@@ -14,17 +14,10 @@ Enter your query:
 Type your queries (e.g., "Search for papers about quantum computing") or type `quit` to exit.
 
 
-## Running with Local vLLMs
+## Serving Local with vLLMs
 
-This project supports running with local vLLMs (e.g., [vLLM](https://github.com/vllm-project/vllm)) for fast, efficient inference on your own hardware.
+This project supports running with local vLLMs (e.g., [vLLM](https://github.com/vllm-project/vllm)) for fast, efficient inference on your own hardware. For using with GPT-OSS-20B please refers to [GPT-OSS](https://docs.vllm.ai/projects/recipes/en/latest/OpenAI/GPT-OSS.html#installation)
 
-### Install vLLM
-
-Follow the [official vLLM installation guide](https://github.com/vllm-project/vllm#installation), or install via pip:
-
-```sh
-pip install vllm
-```
 
 ### Start a Local vLLM Server
 
@@ -46,5 +39,5 @@ Update the `init_agent()` function in `tool_function.py` to point to your local 
 
 ## Notes
 
-- The agent uses a local LLM endpoint by default (`Qwen/Qwen3-0.6B`). You can change this in `init_agent()`.
+- The agent uses a local LLM endpoint by default (`Qwen/Qwen3-0.6B`/`GPT-OSS=20B`). You can change this in `init_agent()`.
 - Paper metadata is saved in the `papers/` directory, organized by topic.
