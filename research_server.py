@@ -18,18 +18,6 @@ def search_papers(topic: str) -> List:
     Returns:
         List[List]: A list of lists containing paper metadata.
     """
-    print('Calling arXiv API to search for papers...')
-    topic = json.loads(topic)
-    print(topic)
-    if isinstance(topic, List):
-        topic = topic[0]
-    elif isinstance(topic, Dict):
-        topic = topic.get("topic", "")
-    else:
-        # If topic is not a list or dict, assume skipping
-        print("Invalid topic format. Expected a list or dict.")
-        return []
-    print('----')
     client = arxiv.Client()
 
     search = arxiv.Search(
@@ -76,16 +64,7 @@ def extract_info(paper_id: str) -> str:
     Returns:
         JSON string with paper information if found, otherwise an error message.
     """
-    print('Calling extract_info function...')
-    paper_id = json.loads(paper_id)
-    if isinstance(paper_id, List):
-        paper_id = paper_id[0]
-    elif isinstance(paper_id, Dict):
-        paper_id = paper_id.get("paper_id", "")
-    else:
-        # If topic is not a list or dict, assume skipping
-        print("Invalid paper_id format. Expected a list or dict.")
-    print('----')   
+    print('Calling extract_info function...') 
     for item in os.listdir(PAPER_DIR):
         item_path = os.path.join(PAPER_DIR, item)
         if os.path.isdir(item_path):
