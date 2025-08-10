@@ -28,7 +28,7 @@ def init_agent(mcp_servers):
 
 class MCP_ChatBot:
     def __init__(self, config_path: str):
-        self.mcpserver: List[ClientSession] = []
+        self.mcpserver: List[] = []
         self.session = SQLiteSession("conversation_123")
         self.config_path = config_path
         self._initialized = False
@@ -73,18 +73,18 @@ class MCP_ChatBot:
             except Exception as e:
                 print(f"An error occurred: {e}")
 
-    async def cleanup(self):
-        """Disconnect MCP servers."""
-        for server in self.mcpserver:
-            await server.disconnect()
-        print("All MCP servers disconnected.")
+    #async def cleanup(self):
+    #    """Disconnect MCP servers."""
+    #    for server in self.mcpserver:
+    #        await server.disconnect()
+    #    print("All MCP servers disconnected.")
 
 async def main():
     chatbot = MCP_ChatBot("server_config.json")
-    try:
-        await chatbot.chat_loop()
-    finally:
-        await chatbot.cleanup()
+    #try:
+    await chatbot.chat_loop()
+    #finally:
+    #    await chatbot.cleanup()
 
 if __name__ == "__main__":
     asyncio.run(main())

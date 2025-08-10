@@ -4,7 +4,7 @@ import os
 from typing import List, Dict, Union, Any
 from mcp.server.fastmcp import FastMCP 
 
-mcp = FastMCP()
+mcp = FastMCP("research", port=8001)
 PAPER_DIR = "papers"
 
 @mcp.tool()
@@ -82,4 +82,4 @@ def extract_info(paper_id: str) -> str:
     return f"There is no saved information for paper ID: {paper_id}"
 
 if __name__ == "__main__":
-    mcp.run(transport='stdio')
+    mcp.run(transport='sse')
