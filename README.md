@@ -1,43 +1,58 @@
+# MCP Integration
+
+This is a ** sampleproject** demonstrating how to connect an OpenAI Agent or other LLMs (with tool-calling capability) to an [MCP server](https://github.com/modelcontextprotocol) through langchain or openai-agent framework for enhanced paper search and chat functionality.  
+It includes:
+
+- Creating and running an MCP server
+- Connecting an LLM (local or remote) to the MCP server
+- Running an interactive chatbot that can search arXiv papers and store results
+
+---
+
 ## Usage
 
-### Run the Tool
+Below are usage examples for each file script.  
+
+---
+
+### `tool_function.py`
+It use arxiv lib to search and extract info from query of user. 
+There are two function calling search and extract information.
+#### Run the test tool function
 
 ```sh
 poetry run python tool_function.py
 ```
 
-You will see:
-```
-Welcome to the arXiv paper search tool! Type 'quit' to exit.
-Enter your query:
-```
-Type your queries (e.g., "Search for papers about quantum computing") or type `quit` to exit.
+### `research_server.py`
+An example of creating a local MCP server with stdio connection.
 
+#### Run the test tool function
 
-## Serving Local with vLLMs
-
-This project supports running with local vLLMs (e.g., [vLLM](https://github.com/vllm-project/vllm)) for fast, efficient inference on your own hardware. For using with GPT-OSS-20B please refers to [GPT-OSS](https://docs.vllm.ai/projects/recipes/en/latest/OpenAI/GPT-OSS.html#installation)
-
-
-### Start a Local vLLM Server
-
-You can launch a vLLM OpenAI-compatible server with your chosen model, for example:
-
-```vllm serve "your model"
+```sh
+npx @modelcontextprotocol/inspector run research_server.py
 ```
 
-Update the `init_agent()` function in `tool_function.py` to point to your local vLLM server (default is `http://localhost:8000/v1`).
+## Serving Locally with vLLMs
 
-**Now, when you run the tool, it will use your local vLLM for LLM-powered features.**
+You can run this project with a local [vLLM](https://github.com/vllm-project/vllm) for faster inference.  
+For GPT-OSS-20B, see [GPT-OSS instructions](https://docs.vllm.ai/projects/recipes/en/latest/OpenAI/GPT-OSS.html#installation).
+
+**Important:** The LLM you choose must have **tool-calling capability** to work with the MCP server.
 
 ---
+### Start a Local vLLM Server
+Open new terminal then run.
 
-## Project Structure
+```sh
+vllm serve openai/gpt-oss-20b
+```
 
-- `tool_function.py` — Main logic for searching and extracting paper info, and the chat loop.
-- `papers/` — Directory where paper metadata is saved as JSON.
+Then update `init_agent()` to point to your vLLM endpoint (default: `http://localhost:8000/v1`).
 
-## Notes
-
-- The agent uses a local LLM endpoint by default (`Qwen/Qwen3-0.6B`/`GPT-OSS=20B`). You can change this in `init_agent()`.
-- Paper metadata is saved in the `papers/` directory, organized by topic.
+---
+### `chatbot_mcp.py`
+```sh
+python chatbot_mcp.py
+```
+Initializes an agent and connects to the MCP server. Each agent maintains its own session.
